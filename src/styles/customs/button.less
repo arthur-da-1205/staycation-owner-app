@@ -1,0 +1,206 @@
+.rs-btn {
+  border-radius: @border-radius-1;
+
+  &.rs-btn-link {
+    padding: 0;
+  }
+}
+
+.rs-btn-primary {
+  background-color: @primary-color;
+  border: 1px solid @primary-color !important;
+  color: @white-color;
+
+  &:hover {
+    background-color: @hover-primary-color;
+    color: @white-color;
+  }
+
+  &:focus {
+    background-color: @hover-primary-color;
+    color: @white-color;
+    outline: 2px solid rgba(212, 95, 184, 0.3);
+  }
+
+  &:active {
+    background-color: @pink-color-2;
+    color: @white-color;
+  }
+
+  &.rs-btn-disabled {
+    background-color: #e5e5e5;
+    border: none !important;
+    color: @black-color;
+    outline: 1px solid #b6b6b6;
+  }
+}
+
+.rs-btn-default {
+  background-color: @white-color;
+  border: 1px solid @primary-color;
+  color: @primary-color;
+
+  &:hover {
+    background-color: @secondary-color;
+    color: @hover-primary-color;
+  }
+
+  &:focus {
+    background-color: @secondary-color;
+    color: @hover-primary-color;
+    outline: 2px solid rgba(212, 95, 184, 0.3);
+  }
+
+  &:active {
+    background-color: @secondary-color;
+    color: @pink-color-2;
+  }
+
+  &.rs-btn-disabled {
+    background-color: #f5f5f5;
+    border: none;
+    color: @muted-color;
+    outline: 1px solid #e5e5e5;
+  }
+}
+
+.rs-btn-ghost {
+  background-color: transparent;
+  border: 1px solid @border-color-1;
+  color: #253d4e;
+
+  &.rs-btn {
+    padding: 8px 11px;
+  }
+
+  &:hover {
+    background-color: @grey-color-5;
+    border-color: @grey-color-5 !important;
+    box-shadow: 0 0 0 1px transparent;
+    color: #253d4e;
+  }
+
+  &:focus {
+    background-color: @grey-color-5;
+    box-shadow: 0 0 0 1px transparent;
+    color: #253d4e;
+    outline: 2px solid rgba(212, 95, 184, 0.3);
+  }
+
+  &:active {
+    background-color: #ededed;
+    border: 1px solid #b6b6b6;
+    color: #253d4e;
+  }
+
+  &.rs-btn-disabled {
+    background-color: #e5e5e5;
+    border: none;
+    color: @black-color;
+    outline: 1px solid #b6b6b6;
+  }
+}
+
+.btn-danger {
+  background-color: @danger-color;
+  color: @white-color;
+
+  &:hover {
+    background-color: @hover-danger-color;
+    color: @white-color;
+  }
+
+  &:focus {
+    background-color: @hover-danger-color;
+    color: @white-color;
+    outline: 1px solid @secondary-color;
+  }
+
+  &:active {
+    background-color: @active-danger-color;
+    color: @white-color;
+  }
+}
+
+.btn-danger-outline {
+  background-color: @white-color;
+  border-color: @danger-color;
+  color: @danger-color;
+
+  &:hover {
+    background-color: @grey-color-5;
+    border-color: @hover-danger-color !important;
+    box-shadow: 0 0 0 1px transparent;
+    color: @hover-danger-color;
+  }
+
+  &:focus {
+    background-color: @white-color;
+    box-shadow: 0 0 0 1px transparent;
+    color: @hover-danger-color;
+    outline: 1px solid @hover-danger-color;
+  }
+
+  &:active {
+    background-color: @white-color;
+    color: @hover-danger-color;
+    outline: 1px solid @hover-danger-color;
+  }
+
+  &.rs-btn-disabled {
+    background-color: #e5e5e5;
+    border: none;
+    color: @black-color;
+    outline: 1px solid #b6b6b6;
+  }
+}
+
+.rs-btn-subtle {
+  &:focus {
+    box-shadow: 0 0 0 1px transparent;
+    outline: 2px solid rgba(212, 95, 184, 0.3) !important;
+  }
+}
+
+.btn-quick-range {
+  border-color: @border-color-1;
+  color: @black-color;
+
+  &:hover {
+    border-color: @hover-primary-color;
+  }
+
+  &:focus {
+    background-color: @white-color;
+    border-color: @hover-primary-color;
+    outline: 3px solid rgba(212, 95, 184, 0.3) !important;
+  }
+}
+
+.rs-btn-loading > .rs-btn-spin::after {
+  border-color: @black-color transparent transparent !important;
+}
+
+.btn-icon {
+  background-color: @white-color;
+  border: none;
+  border-radius: 10px;
+  color: @heading-color;
+  height: 30px !important;
+
+  &.rs-btn-disabled {
+    background-color: @white-color !important;
+    border: none !important;
+    color: @border-color-2 !important;
+    outline: none !important;
+  }
+
+  &:active,
+  &:focus,
+  &:hover {
+    background-color: @white-color !important;
+    border: none !important;
+    color: @black-color;
+    outline: none;
+  }
+}

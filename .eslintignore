@@ -1,0 +1,11 @@
+public
+node_modules
+pnpm-lock.yaml
+**/*.test.js
+**/*.d.ts
+coverage
+.eslintrc.cjs
+vite.config.ts
+.prettierrc.json
+uno.config.js
+postcss.config.js
