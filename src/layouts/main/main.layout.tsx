@@ -144,7 +144,6 @@ const MainLayout: React.FC = () => {
                           [`${menu.icon} mx-a text-2xl mb-1 text-white`]: activePath === menu.link,
                         })}
                       />
-
                       <span className={style.label}>{startCase(camelCase(menu.nav || ''))}</span>
                     </Nav.Item>
                   );
