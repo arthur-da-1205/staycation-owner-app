@@ -1,0 +1,43 @@
+.rs-picker-toggle-value {
+  color: @black-color !important;
+}
+
+.rs-picker-toggle-caret {
+  margin-left: 12px !important;
+  position: static !important;
+}
+
+.rs-picker-menu {
+  border-radius: @border-radius-1;
+  
+  .rs-picker-select-menu-item-active {
+    font-weight: 500 !important;
+  }
+  
+  .rs-picker-search-bar {
+    border-bottom: 1px solid @border-color-1;
+  }
+}
+
+.rs-checkbox {
+  &.putaway-picker {
+    .rs-checkbox-checker {
+      padding-bottom: 0 !important;
+      padding-left: 24px !important;
+      padding-top: 0 !important;
+      width: 100% !important;
+        
+      > label {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 8px !important;
+        justify-content: space-between;
+
+        .rs-checkbox-wrapper {
+          left: 0 !important;
+          top: 0 !important;
+        }
+      }
+    }
+  }
+}

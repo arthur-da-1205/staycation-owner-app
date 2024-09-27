@@ -1,0 +1,20 @@
+.rs-breadcrumb {
+  align-items: center;
+  display: flex;
+  margin-bottom: 0;
+  text-transform: capitalize;
+ 
+  a {
+    color: @grey-color-1;
+  }
+
+  .rs-breadcrumb-item-active {
+    color: @primary-color;
+  }
+
+  &.main-page {
+    .rs-breadcrumb-item-active {
+      color: @grey-color-1;
+    }
+  }
+}

@@ -62,59 +62,16 @@ const MainLayout: React.FC = () => {
       permission: 'none',
     },
     {
-      icon: 'i-mdi:shopping-outline',
-      nav: `orders`,
-      link: 'orders',
+      icon: 'i-mdi:office-building-outline',
+      nav: `myProperties`,
+      link: 'my-properties',
       permission: 'order',
     },
     {
-      icon: 'i-mdi:inbox-arrow-up-outline',
-      nav: `outbounds`,
-      link: 'outbounds',
+      icon: 'i-mdi:shopping-outline',
+      nav: `orders`,
+      link: 'orders',
       permission: 'outbound',
-    },
-    {
-      icon: 'i-mdi:hand-back-left-outline',
-      nav: `picks`,
-      link: 'picks',
-      permission: 'pick',
-    },
-    {
-      icon: 'i-mdi:bookmark-box-outline',
-      nav: `packs`,
-      link: 'packs',
-      permission: 'pack',
-    },
-    {
-      icon: 'i-mdi:truck-fast-outline',
-      nav: `shipments`,
-      link: 'shipments',
-      permission: 'shipment',
-    },
-    {
-      icon: 'i-mdi:file-document',
-      nav: `manifest`,
-      link: 'manifest',
-      permission: 'manifest',
-    },
-    {
-      icon: 'i-mdi:barcode-scan',
-      nav: `quickPrint`,
-      link: 'quick-print',
-      permission: 'print',
-    },
-    {
-      icon: 'i-mdi:cube-send',
-      nav: `quickPack`,
-      link: 'quick-pack',
-      permission: 'pack',
-    },
-  ];
-
-  const sidenav = [
-    {
-      nav: `Main Menu`,
-      menu: mainMenuNav,
     },
   ];
 
@@ -146,19 +103,19 @@ const MainLayout: React.FC = () => {
     setBreadCrumbs(bc);
   }, [location]);
 
-  const hiddenNavItem = (permission: string) => {
-    const permissionList: any = user?.role?.permissions || {};
+  // const hiddenNavItem = (permission: string) => {
+  //   const permissionList: any = user?.role?.permissions || {};
 
-    if (permissionList?.all === true) {
-      return false;
-    }
+  //   if (permissionList?.all === true) {
+  //     return false;
+  //   }
 
-    if (permission !== 'none') {
-      return !Object.keys(permissionList).includes(permission);
-    }
+  //   if (permission !== 'none') {
+  //     return !Object.keys(permissionList).includes(permission);
+  //   }
 
-    return false;
-  };
+  //   return false;
+  // };
 
   return (
     <ProtectedRoute>
@@ -169,32 +126,30 @@ const MainLayout: React.FC = () => {
           </Sidenav.Header>
           <Sidenav.Body>
             <Nav>
-              {map(sidenav, (val, idx) => {
-                return (
-                  <div key={idx} className="flex-col">
-                    <div className={style.title}>{startCase(camelCase(val.nav))}</div>
-                    <div className="p-2">
-                      {map(val.menu, (menu, idx) => {
-                        return (
-                          <Nav.Item
-                            key={idx}
-                            eventKey={`${idx}`}
-                            className={classNames(style.item, {
-                              [style.active]: activePath === menu.link,
-                              [style.hidden]: hiddenNavItem(menu.permission),
-                            })}
-                            as={Link}
-                            to={`/${menu.link}`}
-                          >
-                            <div className={`${menu.icon} mx-a text-2xl mb-1`} />
-                            <span className={style.label}>{startCase(camelCase(menu.nav || ''))}</span>
-                          </Nav.Item>
-                        );
+              <div className="p-2">
+                {map(mainMenuNav, (menu, idx) => {
+                  return (
+                    <Nav.Item
+                      key={idx}
+                      eventKey={`${idx}`}
+                      className={classNames(style.item, {
+                        [style.active]: activePath === menu.link,
+                        // [style.hidden]: hiddenNavItem(menu.permission),
                       })}
-                    </div>
-                  </div>
-                );
-              })}
+                      as={Link}
+                      to={`/${menu.link}`}
+                    >
+                      <div
+                        className={classNames(`${menu.icon} mx-a text-2xl mb-1`, {
+                          [`${menu.icon} mx-a text-2xl mb-1 text-white`]: activePath === menu.link,
+                        })}
+                      />
+
+                      <span className={style.label}>{startCase(camelCase(menu.nav || ''))}</span>
+                    </Nav.Item>
+                  );
+                })}
+              </div>
             </Nav>
           </Sidenav.Body>
         </Sidenav>
@@ -212,21 +167,7 @@ const MainLayout: React.FC = () => {
                   })}
               </Breadcrumb>
             </div>
-            <div className="flex items-center gap-1">
-              {/* <Button appearance="subtle" size="sm" className="flex items-center gap-2">
-                <div className="i-mdi:white-balance-sunny text-orange text-2xl" />
-                <span>Light</span>
-              </Button> */}
-              {/* <div className="i-heroicons:moon-20-solid text-gray text-2xl" /> */}
-              {/* {data && data.expiredToken > 0 && (
-                <div className={style.warning}>
-                  <div className={style.heart} />
-                  <Link to="/stores">
-                    <Plural value={data?.expiredToken} one="# store token expired" other="# store tokens expired" />
-                  </Link>
-                </div>
-              )}
-              <SwitchLanguage /> */}
+            <div className="flex items-center">
               <div className="i-heroicons:bell text-2xl hover:cursor-pointer mr-3 ml-2" />
               <Whisper trigger="click" placement="bottomEnd" speaker={<UserMenu />}>
                 <div className={style.profile}>

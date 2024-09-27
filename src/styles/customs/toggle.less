@@ -1,0 +1,47 @@
+
+.toggle-location {
+  .rs-toggle {
+    width: 75px !important;
+
+    .rs-toggle-presentation {
+      background-color: @muted-color;
+      width: 100% !important;
+
+      .rs-toggle-inner {
+        text-align: center;
+      }
+    }
+
+    &.rs-toggle-checked {
+      .rs-toggle-presentation {
+        background-color: @primary-color !important;
+      }
+
+    }
+  }
+}
+
+.rs-toggle-disabled {
+  .rs-toggle-presentation {
+    background-color: @grey-color-5 !important;
+    color: @muted-color;
+
+    .rs-toggle-inner {
+      text-align: center;
+    }
+  }
+
+  .rs-toggle-presentation::after {
+    color: #E9E9E9;
+  }
+}
+
+.rs-picker-toggle-wrapper .rs-picker-toggle.rs-btn {
+  padding-right: 10px !important;
+}
+
+.tag-input {
+  &.rs-picker-toggle-wrapper {
+    height: auto !important;
+  }
+}

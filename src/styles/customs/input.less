@@ -1,0 +1,52 @@
+.rs-input {
+  align-items: center;
+  display: flex;
+  padding: 7.8px 11px;
+
+  &.rs-input-sm {
+    padding: 4px 11px;
+  }
+
+  &.rs-input-xs {
+    padding: 1px 11px;
+  }
+}
+
+.rs-picker-default .rs-picker-toggle.rs-btn {
+  padding: 7.8px 11px;
+}
+
+.required {
+  &.rs-form-control-label::after {
+    color: @danger-color;
+    content: " *";
+  }
+}
+
+.rs-picker-date {
+  width: 100%;
+}
+
+.rs-picker-toggle-wrapper {
+  height: 38px !important;
+}
+
+.tag-picker {
+  &.rs-picker-toggle-wrapper {
+    height: auto !important;
+    // min-height: 42px !important;
+  }
+}
+
+.rs-picker-tag-wrapper {
+  .rs-picker-search-input {
+    padding-left: 10px !important;
+  }
+}
+// Input Group
+
+.rs-input-group {
+  .rs-input-number {
+    border-radius: @border-radius-1;
+  }
+}

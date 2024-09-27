@@ -1,0 +1,38 @@
+.rs-progress-line {
+  padding: 0 !important;
+
+  &.onboard-progress {
+    .rs-progress-line-inner {
+      height: 2px !important;
+      width: 100% !important;
+
+      .rs-progress-line-bg {
+        border-radius: 0 !important
+      }
+    }
+  }
+}
+
+.progress-received {
+  .rs-progress-line-bg {
+    background-color: @success-color !important;
+  }
+}
+
+.progress-underReceived {
+  .rs-progress-line-bg {
+    background-color: @orange-1-color !important;
+  }
+}
+
+.progress-overReceived {
+  .rs-progress-line-bg {
+    background-color: @danger-color !important;
+  }
+}
+
+.progress-partialReceived {
+  .rs-progress-line-bg {
+    background-color: #5C6BC0 !important;
+  }
+}

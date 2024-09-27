@@ -1,0 +1,24 @@
+.rs-table-cell-content {
+  border-bottom: none;
+
+  .rs-checkbox-wrapper {
+    top: 2px;
+  }
+}
+
+.rs-checkbox {
+  &.remember-check {
+    margin-left: -8px !important;
+  }
+
+  &.putaway-checker {
+    .rs-checkbox-checker {
+      width: 100%;
+
+      > label {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}

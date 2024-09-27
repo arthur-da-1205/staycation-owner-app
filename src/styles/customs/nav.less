@@ -1,0 +1,24 @@
+.nav-custom {
+  &.rs-nav {
+    &.rs-nav-horizontal {
+      .rs-nav-item {
+        color: @border-color-2 !important;
+        padding: 10px;
+      }
+
+      .rs-nav-item-active {
+        color: @primary-color !important;
+        font-weight: 800 !important;
+
+        &::before {
+          background-color: @primary-color !important;
+          height: 1px !important;
+        }
+      }
+
+      .rs-nav-bar {
+        border: 1px solid @border-color-1 !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+.rs-drawer-content {
+  background-color: #FAFAFB;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+
+  .rs-drawer-header {
+    align-items: start;
+    border-bottom: none;
+    display: flex;
+    flex-flow: row-reverse;
+    justify-content: space-between;
+    padding: 20px 30px;
+
+    &::after, &::before {
+      display: none;
+    }
+
+    .rs-drawer-header-close {
+      position: static;
+
+      &:hover {
+        background-color: #E3E3E3;
+      }
+
+      svg {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .rs-drawer-title {
+    color: @black-color;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .rs-drawer-body {
+    flex: 1;
+    height: 100%;
+    padding: 0 30px;
+    padding-bottom: 0;
+  }
+}
+
+.button-drawer {
+  align-items: center;
+  backdrop-filter: blur(6px);
+  background: rgba(229, 229, 229, 0);
+  bottom: 0;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 -30px;
+  padding: 20px;
+  position: sticky !important;
+  z-index: 10
+}

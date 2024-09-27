@@ -11,7 +11,8 @@ export default defineConfig({
       // ...
       bgNatural: '#FDFDFD',
       primary: '#FFAE42',
-      pink: '#FDE9F9',
+      secondary: '#ffe6c6',
+      white: '#fff',
     },
   },
   presets: [
