@@ -1,37 +1,44 @@
 // eslint-disable-next-line max-classes-per-file
-import { INode, IPagingData, ICursorPagingData } from '@resources/models/paginate.model';
+import { IPagingData } from '@resources/models/paginate.model';
+import { includes, omit } from 'lodash-es';
 import { mutation, params as Payload, query, rawString, types } from 'typed-graphqlify';
 import { QueryObject } from 'typed-graphqlify/dist/graphqlify';
-import { Params } from 'typed-graphqlify/dist/render';
 
-export function rawStringConverter(node: any) {
-  if (node) {
+// import { Params } from 'typed-graphqlify/dist/render';
+export interface Params {
+  [key: string]: string | boolean | number | null | Params | Array<Params>;
+}
+
+export function nestedRawString(payload: any, excludeKeys?: string[], forceString?: []) {
+  if (payload) {
     // eslint-disable-next-line consistent-return
-    Object.keys(node).forEach((k) => {
-      if (typeof node[k] === 'object') {
-        return rawStringConverter(node[k]);
-      }
+    Object.keys(payload).forEach((k) => {
+      if (!includes(excludeKeys || [], k)) {
+        if (typeof payload[k] === 'object') {
+          return nestedRawString(payload[k], excludeKeys);
+        }
 
-      if (typeof node[k] === 'string') {
-        const transform = (text: string) => {
-          if (text.toLowerCase() === 'true' || text.toLowerCase() === 'false') {
-            return text.toLowerCase() === 'true';
-          }
+        if (includes(forceString || [], k) || typeof payload[k] === 'string') {
+          const transform = (text: string) => {
+            if (text.toLowerCase() === 'true' || text.toLowerCase() === 'false') {
+              return text.toLowerCase() === 'true';
+            }
 
-          try {
-            return JSON.parse(text);
-          } catch (jsonError) {
-            return /^-?[\d.]+(?:e-?\d+)?$/.test(text) && !Number.isNaN(parseFloat(text)) ? parseFloat(text) : text;
-          }
-        };
+            try {
+              return JSON.parse(text);
+            } catch (jsonError) {
+              return /^-?[\d.]+(?:e-?\d+)?$/.test(text) && !Number.isNaN(parseFloat(text)) ? parseFloat(text) : text;
+            }
+          };
 
-        // eslint-disable-next-line no-param-reassign
-        node[k] = rawString(transform(node[k]));
+          // eslint-disable-next-line no-param-reassign
+          payload[k] = rawString(transform(payload[k]));
+        }
       }
     });
   }
 
-  return node;
+  return payload;
 }
 
 export class GqlModel<T extends QueryObject> {
@@ -43,7 +50,7 @@ export class GqlModel<T extends QueryObject> {
 
   setParams(alias: keyof T, params: Params) {
     if (this.data && this.data[alias]) {
-      this.data[alias] = Payload(params, this.data[alias]);
+      this.data[alias] = Payload(params as any, this.data[alias]);
     }
   }
 
@@ -60,47 +67,6 @@ export class GqlModel<T extends QueryObject> {
   }
 }
 
-export class GqlCursorPaginateModel<S extends string, T> {
-  public data: { [key in S]: ICursorPagingData<T> } = {} as any;
-
-  public nodes: INode<T>;
-
-  constructor(key: S, query: T) {
-    this.data[key] = {
-      edges: {
-        cursor: types.string,
-        node: [query],
-      },
-      total_count: types.number,
-      page_info: {
-        has_next_page: types.string,
-        start_cursor: types.string,
-        has_previous_page: types.string,
-        end_cursor: types.string,
-      },
-    };
-
-    this.nodes = { cursor: types.string, ...query };
-  }
-
-  setParams(alias: S, params: Params) {
-    if (this.data && this.data[alias]) {
-      // Set Default Limit
-      if (params?.last && params?.first) {
-        Object.assign(params, { first: 25 }); // Default Limit is 25
-      }
-
-      this.data[alias] = Payload(rawStringConverter(params), this.data[alias]);
-    }
-  }
-
-  query(): string {
-    const gql = query(this.data as typeof this.data);
-
-    return gql.toString();
-  }
-}
-
 export class GqlPaginateModel<S extends string, T> {
   public data: { [key in S]: IPagingData<T> } = {} as any;
 
@@ -111,9 +77,9 @@ export class GqlPaginateModel<S extends string, T> {
       items: [query],
       meta: {
         page: types.number,
-        page_count: types.number,
         per_page: types.number,
         total_count: types.number,
+        page_count: types.number,
       },
     };
 
@@ -127,7 +93,27 @@ export class GqlPaginateModel<S extends string, T> {
         Object.assign(params, { first: 25 }); // Default Limit is 25
       }
 
-      this.data[alias] = Payload(rawStringConverter(params), this.data[alias]);
+      const filter = {
+        field: rawString(JSON.stringify(params.field)),
+      };
+
+      if (params.operator) {
+        Object.assign(filter, { operator: rawString(JSON.stringify(params.operator)) });
+      }
+
+      let paramFil: any;
+
+      if (params.field && !params.search) {
+        paramFil = { ...omit(params, ['field', 'operator']), filter };
+      } else if (params.search && !params.field) {
+        paramFil = { ...omit(params, ['field', 'operator']), search: rawString(params?.search as any) };
+      } else if (params.field && params.search) {
+        paramFil = { ...omit(params, ['field', 'operator']), search: rawString(params?.search as any), filter };
+      } else {
+        paramFil = params;
+      }
+
+      this.data[alias] = Payload(nestedRawString(paramFil), this.data[alias]);
     }
   }
 

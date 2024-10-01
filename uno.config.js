@@ -10,8 +10,8 @@ export default defineConfig({
     colors: {
       // ...
       bgNatural: '#FDFDFD',
-      primary: '#FFAE42',
-      secondary: '#ffe6c6',
+      primary: '#005ab0',
+      secondary: '#c4e2ff',
       white: '#fff',
     },
   },
