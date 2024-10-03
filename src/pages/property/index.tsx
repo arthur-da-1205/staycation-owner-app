@@ -2,7 +2,7 @@ import Badge from '@components/commons/badge/badge.components';
 import LinkButton from '@components/commons/link-button/link-button.component';
 import PageTitle from '@components/page-title/page-title.component';
 import QueryTable from '@components/tables/query-table/query-table.component';
-import { AccommodationModel } from '@resources/models/accommodation.model';
+import { PropertyModel } from '@resources/models/property.model';
 import React from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Table, Text } from 'rsuite';
@@ -17,8 +17,8 @@ const PropertyPage: React.FC = () => {
     <>
       <PageTitle title="My Properties" />
       <QueryTable
-        query="ownerAccommodationList"
-        model={AccommodationModel}
+        query="ownerPropertyList"
+        model={PropertyModel}
         globalActionClassname="left-40"
         // isSelectable
         refresh={location.state !== null}
@@ -28,7 +28,7 @@ const PropertyPage: React.FC = () => {
             startIcon={<div className="i-heroicons:plus-20-solid text-lg" />}
             onClick={() => navigate({ pathname: 'create', search: location.search })}
           >
-            <Text>Add Accommodations</Text>
+            <Text>Add Property</Text>
           </Button>
         }
       >
@@ -38,6 +38,16 @@ const PropertyPage: React.FC = () => {
           </HeaderCell>
           <Cell dataKey="name">
             {(rowData) => <LinkButton label={rowData.name} link={`${rowData.id}/overview`} search={location.search} />}
+          </Cell>
+        </Column>
+        <Column flexGrow={1} sortable>
+          <HeaderCell>
+            <Text>Location</Text>
+          </HeaderCell>
+          <Cell dataKey="location">
+            {(rowData) => {
+              return <Text>{rowData.location}</Text>;
+            }}
           </Cell>
         </Column>
         <Column flexGrow={1}>
@@ -61,6 +71,7 @@ const PropertyPage: React.FC = () => {
           </Cell>
         </Column>
       </QueryTable>
+
       <Outlet />
     </>
   );

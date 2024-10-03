@@ -63,7 +63,7 @@ const MainLayout: React.FC = () => {
     },
     {
       icon: 'i-mdi:office-building-outline',
-      nav: `myProperties`,
+      nav: `Properties`,
       link: 'my-properties',
       permission: 'order',
     },

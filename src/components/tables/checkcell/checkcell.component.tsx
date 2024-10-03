@@ -1,4 +1,3 @@
-import React from 'react';
 import { Checkbox, Table } from 'rsuite';
 
 const { Cell } = Table;

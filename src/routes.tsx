@@ -4,6 +4,7 @@ import Dashboard from '@pages/dashboard';
 import LoginPage from '@pages/login';
 import OrderPage from '@pages/order';
 import PropertyPage from '@pages/property';
+import PropertyCreatePage from '@pages/property/create';
 import { Navigate, RouteObject } from 'react-router-dom';
 
 export default [
@@ -29,6 +30,8 @@ export default [
       {
         path: '/my-properties',
         element: <PropertyPage />,
+        breadcrumb: 'myProperties',
+        children: [{ path: 'create', element: <PropertyCreatePage />, breadcrumb: 'create' }],
       },
       {
         path: '/orders',
