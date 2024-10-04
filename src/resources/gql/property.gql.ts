@@ -1,10 +1,27 @@
-import { useGqlMutation } from '@hooks/useGql';
+import { QueryOptions } from '@apollo/client';
+import { useGqlMutation, useGqlQuery } from '@hooks/useGql';
 import { GqlModel } from '@libraries/graphql/model';
 import { PropertyCreateInput } from '@resources/input/property.input';
 import { PropertyModel } from '@resources/models/property.model';
 import { rawString } from 'typed-graphqlify';
 
-export function useGetPropertyDetailQuery() {}
+export function useGetPropertyDetailQuery(id: any) {
+  const model = new GqlModel({
+    ownerPropertyDetail: { ...PropertyModel },
+  });
+
+  const [trigger, { data, ...result }] = useGqlQuery<typeof model.data>({ fetchPolicy: 'no-cache' } as QueryOptions);
+
+  function execute() {
+    model.setParams('ownerPropertyDetail', {
+      id,
+    });
+
+    return trigger(model.query());
+  }
+
+  return [execute, { ...result, data: data?.data.ownerPropertyDetail }] as const;
+}
 
 export function usePropertyAddMutation() {
   const model = new GqlModel({ ownerCreateProperty: PropertyModel });

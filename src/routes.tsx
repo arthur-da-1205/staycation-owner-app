@@ -5,6 +5,8 @@ import LoginPage from '@pages/login';
 import OrderPage from '@pages/order';
 import PropertyPage from '@pages/property';
 import PropertyCreatePage from '@pages/property/create';
+import PropertyDetailPage from '@pages/property/detail';
+import PropertyOverviewPage from '@pages/property/detail/overview';
 import { Navigate, RouteObject } from 'react-router-dom';
 
 export default [
@@ -31,7 +33,26 @@ export default [
         path: '/my-properties',
         element: <PropertyPage />,
         breadcrumb: 'myProperties',
-        children: [{ path: 'create', element: <PropertyCreatePage />, breadcrumb: 'create' }],
+        children: [
+          { path: 'create', element: <PropertyCreatePage />, breadcrumb: 'create' },
+          {
+            path: ':id',
+            children: [
+              {
+                element: <PropertyDetailPage />,
+                breadcrumb: 'id',
+                children: [
+                  { index: true, element: <Navigate to="overview" />, breadcrumb: 'id' },
+                  {
+                    path: 'overview',
+                    element: <PropertyOverviewPage />,
+                    breadcrumb: 'overview',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
       {
         path: '/orders',

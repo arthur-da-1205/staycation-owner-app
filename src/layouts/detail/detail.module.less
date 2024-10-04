@@ -1,0 +1,49 @@
+.sidenav {
+  background-color: @grey-color-5;
+  border: 1px solid @border-color-1;
+  border-radius: 10px !important;
+  height: auto;
+  max-width: fit-content;
+  position: fixed;
+  top: 5.15rem;
+  z-index: 12 !important;
+
+  &:hover {
+    z-index: 2;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .item {
+    background-color: transparent !important;
+    font-size: 14px !important;
+    line-height: 1.25rem !important;
+    padding-left: 60px !important;
+
+    &:hover {
+      background-color: transparent !important;
+      border-color: transparent !important;
+      color: @primary-color !important;
+    }
+  }
+
+  .active {
+    background-color: @pink-color-1;
+    color: @primary-color;
+
+    span {
+      font-weight: 600;
+    }
+
+    &:hover {
+      background-color: @pink-color-1;
+    }
+  }
+}
+
+.children {
+  padding-left: 4.5rem;
+  width: 100%;
+}
